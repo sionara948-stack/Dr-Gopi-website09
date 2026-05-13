@@ -1,0 +1,296 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Dr. Gopi's Speciality Clinic — editorial monochrome design system.
+ * Warm whites, graphite blacks, muted silvers. Cinematic restraint.
+ */
+
+@theme inline {
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-silver: var(--silver);
+  --color-fog: var(--fog);
+  --color-graphite: var(--graphite);
+  --color-ink: var(--ink);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Editorial monochrome palette */
+  --background: oklch(0.985 0.003 80);        /* warm soft white */
+  --foreground: oklch(0.18 0.005 270);         /* graphite ink */
+  --ink: oklch(0.12 0.005 270);
+  --graphite: oklch(0.28 0.005 270);
+  --silver: oklch(0.78 0.004 270);
+  --fog: oklch(0.94 0.003 80);
+
+  --card: oklch(0.99 0.002 80);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.985 0.003 80 / 0.85);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.18 0.005 270);
+  --primary-foreground: oklch(0.985 0.003 80);
+  --secondary: oklch(0.94 0.003 80);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.94 0.003 80);
+  --muted-foreground: oklch(0.48 0.005 270);
+  --accent: oklch(0.92 0.004 80);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.985 0.003 80);
+  --border: oklch(0.88 0.004 80);
+  --input: oklch(0.88 0.004 80);
+  --ring: oklch(0.55 0.005 270);
+
+  --shadow-soft: 0 30px 60px -30px oklch(0.18 0.005 270 / 0.18);
+  --shadow-float: 0 20px 50px -20px oklch(0.18 0.005 270 / 0.25);
+  --gradient-fog: linear-gradient(180deg, oklch(0.985 0.003 80 / 0) 0%, oklch(0.94 0.003 80 / 0.6) 100%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Hide native scrollbar */
+  ::-webkit-scrollbar { width: 0; background: transparent; }
+  html { scrollbar-width: none; }
+
+  /* Hide native cursor on interactive elements but show our custom one */
+  a, button, [role="button"], input, textarea, select, label { cursor: none; }
+}
+
+@layer components {
+  .editorial-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    font-weight: 400;
+  }
+
+  .editorial-display {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+  }
+
+  /* Underline ray hover for nav links */
+  .nav-link {
+    position: relative;
+    padding-bottom: 6px;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent 0%, var(--foreground) 50%, transparent 100%);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 8px oklch(0.18 0.005 270 / 0.25);
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .glass-panel {
+    background: oklch(0.985 0.003 80 / 0.6);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    border: 1px solid oklch(1 0 0 / 0.45);
+  }
+
+  /* Premium navbar shell — floating glass with depth */
+  .navbar-shell {
+    background: oklch(0.985 0.003 80 / 0.72);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid oklch(1 0 0 / 0.5);
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 0.6) inset,
+      0 12px 40px -12px oklch(0.18 0.005 270 / 0.18),
+      0 4px 14px -6px oklch(0.18 0.005 270 / 0.08);
+  }
+
+  /* Navbar pill CTA */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 1.1rem 0.65rem 1.25rem;
+    border-radius: 9999px;
+    background: var(--foreground);
+    color: var(--background);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid var(--foreground);
+  }
+  .btn-pill:hover {
+    background: transparent;
+    color: var(--foreground);
+  }
+  .btn-pill .btn-pill-arrow {
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-pill:hover .btn-pill-arrow { transform: translateX(3px); }
+
+  /* Editorial CTA buttons */
+  .btn-editorial {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.05rem 1.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 400;
+    border: 1px solid var(--foreground);
+    color: var(--foreground);
+    background: transparent;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-editorial::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--foreground);
+    transform: translateY(101%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+  }
+  .btn-editorial:hover { color: var(--background); }
+  .btn-editorial:hover::before { transform: translateY(0); }
+
+  .btn-editorial-filled {
+    background: var(--foreground);
+    color: var(--background);
+  }
+  .btn-editorial-filled::before { background: var(--background); }
+  .btn-editorial-filled:hover { color: var(--foreground); }
+
+  /* Live chat pill — clearly clickable */
+  .chat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: 9999px;
+    background: var(--foreground);
+    color: var(--background);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    border: 1px solid var(--foreground);
+    box-shadow: 0 18px 40px -12px oklch(0.18 0.005 270 / 0.4);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .chat-pill:hover {
+    background: var(--background);
+    color: var(--foreground);
+    transform: translateY(-2px);
+  }
+  .chat-pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: currentColor;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  /* Chat panel — warm cream, premium clinic */
+  .chat-panel {
+    background: oklch(0.97 0.005 80);
+    border: 1px solid oklch(0.18 0.005 270 / 0.12);
+    box-shadow:
+      0 30px 70px -20px oklch(0.18 0.005 270 / 0.35),
+      0 10px 30px -10px oklch(0.18 0.005 270 / 0.15);
+    color: var(--foreground);
+  }
+}
+
