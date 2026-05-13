@@ -12,6 +12,7 @@ export default defineConfig({
   },
 
   preview: {
-    allowedHosts: ["keen-energy-production-fa36.up.railway.app"]
+    host: "0.0.0.0",
+    allowedHosts: true
   }
 });
